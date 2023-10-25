@@ -4,7 +4,7 @@ body {
     letter-spacing: 0.5px;
             }
   
-h1{
+h1, .rodape{
     text-align: center;
 }
 
@@ -33,10 +33,6 @@ td {
     color: black;
     font-size: 18px;
    }
-
-/* .inteiro {
-    content: attr(data-number) '.';
-} */
 
 .quadro {
     display: inline-block;
