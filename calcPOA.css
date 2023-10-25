@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     letter-spacing: 0.5px;
-            }
+}
   
 h1, .rodape{
     text-align: center;
@@ -11,6 +11,7 @@ h1, .rodape{
     margin: 0 auto;
     display: block;
 }
+
 .table {
     border-collapse: collapse;
     border: 1px solid #ededed;
@@ -58,7 +59,6 @@ td {
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 10px;
-
 }
 
 .container {
