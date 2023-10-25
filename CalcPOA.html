@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora POA</title>
+    <link rel="stylesheet" href="calcPOA.css">
+</head>
+<body>
+    <div class="container">
+    <h1>Calculadora POA</h1>
+    <div id="valores" class="quadro">
+        <h2>Valores referentes ao POA</h2>
+        <p>*Observação: Os valor preenchidos devem estar atualizados conforme todos os aditivos do Documento Descritivo, pactuações e repactuações.</p>
+        <p>Total pré-fixado (mensal):</p>
+            <span>R$ </span><input id="totalPreFixado" type="number" step="0.01" min="0" />
+        <p>Média Complexidade Hospitalar (mensal):</p>
+            <span>R$ </span><input id="mediaComplHosp" type="number" step="0.01" min="0" />
+        <p>Média Complexidade Ambulatorial (mensal):</p>
+            <span>R$ </span><input id="mediaComplAmb" type="number" step="0.01" min="0" />
+        <button id="botaoMetas" onclick="calcularMetas()"> Calcular Valor das Metas</button>
+        <p>Metas Hospitalares: <span id="metasHospPerc"></span></p>
+        <p>Metas Ambulatoriais: <span id="metasAmbPerc"></span></p>
+        
+        
+        <table class="table tab1" >
+            <tr class="title">
+                <td><strong></strong></td>
+                <td><strong>Metas Quantitativas</strong></td>
+                <td><strong>Metas Qualitativas</strong></td>
+                <td><strong>TOTAL</strong></td>
+
+            </tr>
+            <tr class="info">
+                <td><strong>Ambulatoriais</strong></td>
+                <td>R$ <span id="metasQuantiAmb"> 0</span></td>
+                <td rowspan="2">R$ <span id="metasQuali"> 0</span></td>
+                <td rowspan="2"></td>
+
+            </tr>
+            <tr class="info">
+                <td><strong>Hospitalares</strong></td>
+                <td>R$ <span id="metasQuantiHosp">0 </span></td>
+               
+            
+
+            </tr>
+                <tr class="total">
+                <td><strong>TOTAL</strong></td>
+                <td>R$ <span id="metasQuanti">0 </span></td>
+                <td>R$ <span id="metasQuali1"> 0</span></td>
+               <td>R$ <span id="total">0</span></td>
+
+                
+
+            </tr>
+        </table>
+    
+    </div>
+    <div id="quantitativas" class="quadro">
+        <h2>1. Referente às metas QUANTITATIVAS pactuadas (60% do valor pré-fixado):</h2>
+        <div id="quantiAmb" class="quadrop"><h3>AVALIAÇÃO DAS METAS AMBULATORIAIS</h3>
+        <table class="table" >
+            <tr class="title">
+                <td><strong>GRUPO DE PROCEDIMENTOS</strong></td>
+                <td><strong>META FÍSICA PACTUADA</strong></td>
+                <td><strong>APROVADA</strong></td>
+                <td><strong>PERCENTUAL ATINGIDO</strong></td>
+            </tr>
+            <tr class="info">
+                <td>Grupo 02 - Procedimentos com finalidade diagnóstica</td>
+                <td><input id="metaGrupo02" type="number" /></td>
+                <td><input id="aprovGrupo02"  type="number" /></td>
+                <td><span  id="percGrupo02">0</span></td>
+            </tr>
+            <tr class="info">
+                <td>Grupo 03 - Procedimentos clínicos</td>
+                <td><input id="metaGrupo03"  type="number" /></td>
+                <td><input id="aprovGrupo03"  type="number" /></td>
+                <td><span  id="percGrupo03">0</span></td>
+            </tr>
+            <tr class="info">
+                <td>Grupo 04 - Procedimentos cirúrgicos</td>
+                <td><input id="metaGrupo04"  type="number" /></td>
+                <td><input id="aprovGrupo04"  type="number" /></td>
+                <td><span   id="percGrupo04">0</span></td>
+            </tr>
+            <tr class="total">
+                <td>TOTAL</td>
+                <td><span id="totalMeta">0</span></td>
+                <td><span id="totalAprov">0</span></td>
+                <td><span  id="somaPerc">0</span></td>
+            </tr>
+        </table>
+        <button id="botaoCalc1QuantiAmb" onclick="calcular1QuantiAmb()"> Calcular</button></div>
+    
+    <div id="quantiHosp" class="quadrop">
+        <h3>AVALIAÇÃO DAS METAS HOSPITALARES</h3>
+        <p>(exceto para prestadores que os contratos não foram atualizados)</p>
+            <table class="table">
+                <tr class="title">
+                    <td><strong>INTERNAMENTOS DE MÉDIA COMPLEXIDADE</strong></td>
+                    <td><strong>META FÍSICA PACTUADA</strong></td>
+                    <td><strong>META FÍSICA APROVADA</strong></td>
+                    <td><strong>MÉDIA PONDERADA</strong></td>
+                    <td><strong>PERCENTUAL ATINGIDO</strong></td>
+                </tr>
+                <tr class="info">
+                    <td>Urgência/Emergência</td>
+                    <td><input id="metaUE" type="number" /></td>
+                    <td><input id="aprovUE"  type="number" /></td>
+                    <td><span  id="pondUE">0</span></td>
+                    <td><span  id="percUE">0</span></td>
+                </tr>
+                <tr class="info">
+                    <td>Eletivos</td>
+                    <td><input id="metaElet" type="number" /></td>
+                    <td><input id="aprovElet"  type="number" /></td>
+                    <td><span  id="pondElet">0</span></td>
+                    <td><span  id="percElet">0</span></td>
+                </tr>
+                <tr class="info">
+            <td>Leitos de UCP</td>
+            <td><input id="metaUCP" type="number" /></td>
+            <td><input id="aprovUCP"  type="number" /></td>
+            <td><span  id="pondUCP">0</span></td>
+            <td><span  id="percUCP">0</span></td>
+        </tr>
+                <tr class="total">
+                    <td>TOTAL</td>
+                    <td><span id="totalMetaQuantiHosp">0</span></td>
+                    <td><span id="totalAprovQuantiHosp">0</span></td>
+                    <td><span  id="pondQuantiHosp">0</span></td>
+                    <td><span  id="percQuantiHosp">0</span></td>
+                </tr>
+            </table>
+            <button id="calcular1QuantiHosp" onclick="calcular1QuantiHosp()"> Calcular</button></div>
+        
+
+   
+    <div id="quantiHospOld" class="quadrop">
+        <h3>AVALIAÇÃO DAS METAS HOSPITALARES</h3>
+        <p>(para prestadores que os contratos não foram atualizados)</p>
+            <table class="table">
+                <tr class="title">
+                    <td><strong>INTERNAMENTOS DE MÉDIA COMPLEXIDADE</strong></td>
+                    <td><strong>META FÍSICA PACTUADA</strong></td>
+                    <td><strong>META FÍSICA APROVADA</strong></td>
+                    <td><strong>MÉDIA ARITMÉTICA</strong></td>
+                    <td><strong>PERCENTUAL ATINGIDO</strong></td>
+                </tr>
+                <tr class="info">
+                    <td>Urgência/Emergência</td>
+                    <td><input id="metaUEOld" type="number" /></td>
+                    <td><input id="aprovUEOld"  type="number" /></td>
+                    <td><span  id="aritUEOld">0</span></td>
+                    <td><span  id="percUEOld">0</span></td>
+                </tr>
+                <tr class="info">
+                    <td>Eletivos</td>
+                    <td><input id="metaEletOld" type="number" /></td>
+                    <td><input id="aprovEletOld"  type="number" /></td>
+                    <td><span  id="aritEletOld">0</span></td>
+                    <td><span  id="percEletOld">0</span></td>
+                </tr>
+                <tr class="info">
+            <td>Leitos de UCP</td>
+            <td><input id="metaUCPOld" type="number" /></td>
+            <td><input id="aprovUCPOld"  type="number" /></td>
+            <td><span  id="aritUCPOld">0</span></td>
+            <td><span  id="percUCPOld">0</span></td>
+        </tr>
+                <tr class="total">
+                    <td>TOTAL</td>
+                    <td><span id="totalMetaQuantiHospOld">0</span></td>
+                    <td><span id="totalAprovQuantiHospOld">0</span></td>
+                    <td><!--<span  id="aritQuantiHospOld">0</span>--></td>
+                    <td><span  id="percQuantiHospOld">0</span></td>
+                </tr>
+            </table>
+            <button id="calcular1QuantiHospOld" onclick="calcular1QuantiHospOld()"> Calcular</button></div>
+        
+
+    </div>
+</div>
+
+  
+    <script src="calcPOA.js"></script>
+</body>
+</html>
